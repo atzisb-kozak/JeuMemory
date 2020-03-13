@@ -1,0 +1,59 @@
+body{
+    background-color: black;
+}
+
+#logosite{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#labyrinthev1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+#niveau{
+    display: block;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#footer{
+    display: block;
+    color: white;
+}
+
+#linelabytrue{
+    height : 30px;
+    width : 30px;
+    background : black;
+}
+#linelabyfalse{
+    height : 30px;
+    width : 30px;
+    background : white;
+}
+#laby_set{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#gif1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fleche{
+    display: block;
+    margin-left: right;
+    margin-right: right;
+}

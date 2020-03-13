@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="style.css" rel="stylesheet">
+        <script src="laby.js" rel="text/javascript"></script>
+        <title>JEU MEMORY</title>
+    </head>
+    
+    
+
+    <body>
+        <img src="img/JEUMEMORYWHITE.png"  alt="logosite" id="logosite">
+        <br/>
+        <center>
+            <div>
+                <table id="laby_set">
+                </table>
+            </div>
+        </center>
+        <br/>
+        <center>
+            <div id="fleche"></div>
+                <input type="button" value="🢕">
+                <br/>
+                <input type="button" value="🢔">
+                <input type="button" value="🢗">
+                <input type="button" value="🢖">
+        </center>
+     <br/>
+
+        <center><h1 id="niveau">CHOISISSEZ VOTRE NIVEAU</h1></center>
+        <div id="button">
+        <center>
+            <input type="button" value ="1" onclick="set_laby(labyV1)">
+            <input type="button" value ="2" onclick="set_laby(labyV2)">
+            <input type="button" value ="JOUER" onclick="labyrinthe(labyV1)">
+        </center>
+    </div>
+    
+<br/>
+
+    <center>
+        <form name="chronoForm">
+         <input type="text" name="chronotime" id="chronotime" value="0:00:00:00"/>
+           <input type="button" name="startstop" value="start!" onClick="chronoStart()" />
+           <input type="button" name="reset" value="reset!" onClick="chronoReset()" />
+       </form>
+       </center>
+<footer>
+    <div class="footer-bottom">
+        <div class="site-container footer-bottom-inner">
+            <center><p id="footer">© 2020 | Created by Corenthin Techer & Alexandre Kergoat  | All rights Reserved.</pid="niveau">
+            </div></center>
+    </div>
+</footer>
+
+</html>
