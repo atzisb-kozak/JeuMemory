@@ -5,20 +5,20 @@ if(this.checked)
     {
         let theme="dark";
         trans();
-        document.documentElement.setAttribute('data-theme',theme);
-        document.getElementById("imgtitle").setAttribute('src','img/JEUMEMORYWHITE.png');
+        $('html').attr('data-theme',theme);
+        $('#imgtitle').attr('src','img/JEUMEMORYWHITE.png');
     }else{
         let theme="light";
         trans();
-        document.documentElement.setAttribute('data-theme',theme);
-        document.getElementById("imgtitle").setAttribute('src','img/JEUMEMORYBLACK.png');
+        $('html').attr('data-theme',theme);
+        $('#imgtitle').attr('src','img/JEUMEMORYBLACK.png');
     }
 });
 
 let trans = ()=>{
-    document.documentElement.classList.add('transition');
+   $('html').addClass('transition');
     window.setTimeout(()=>
     {
-        document.documentElement.classList.remove('transition'); 
+       $('html').removeClass('transition'); 
     }, 1000);
 }
