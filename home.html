@@ -2,56 +2,77 @@
 <html data-theme="">
     <head>
         <meta charset="utf-8">
-        <link href="style.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/card.css" rel="stylesheet">
         <title>JEU MEMORY</title>
     </head>
     <body>
-    <div class="block-title">
-        <div class="title">
-            <img id="imgtitle" src="img/JEUMEMORYBLACK.png">
-        </div>
-        <div class="toogle">
-            <input type="checkbox" id="switch" name="theme">
-        </div>
-    </div>
-    
-    <center>
-        <div>
-            <table id="laby_set">
-            </table>
-        </div>
-    </center>
-    <br>
+        <section class="block-title">
+            <div class="title">
+                <img id="imgtitle" src="img/JEUMEMORYBLACK.png">
+            </div>
+            <div class="toogle">
+                <input type="checkbox" id="switch" name="theme">
+            </div>
+        </section>
+        <section class="edit_niveau displaynone">
+                <h1 id=niveau>CHOISISSEZ VOTRE DOS DE CARTE</h1>
+                <center>
+                    <section class="container">
 
-    <center><h1 id="niveau">CHOISISSEZ VOTRE NIVEAU</h1></center>
-    <div id="button">
-    <center>
-        <input type="button" value="1" onclick="set_laby(labyV1)">
-        <input type="button" value="2" onclick="set_laby(labyV2)">
-        <input type="button" value="JOUER" onclick="labyrinthe(labyV1)">
-    </center>
-</div>
-<br>
-  <center class="">
-    <form name="chronoForm">
-     <input type="text" name="chronotime" id="chronotime" value="0:00:00:00"/>
-       <input type="button" name="startstop" value="start!" onClick="chronoStart();" />
-       <input type="button" name="reset" value="reset!" onClick="chronoReset();chronoStart();"  />
-   </form>
-   </center>
-<footer>
-<div class="footer-bottom">
-    <div class="site-container footer-bottom-inner">
-        <center><p id="footer">© 2020 | Created by Corenthin Techer &amp; Alexandre Kergoat  | All rights Reserved.
-        </p></center></div>
-</div>
-</footer>
+                    </section>
+                </center>
+                <h1 id="niveau">CHOISISSEZ VOTRE NIVEAU</h1>
+                <section id="button">
+                    <center>
+                        <input type="button" value="2/3">
+                        <input type="button" value="3/6">
+                        <input type="button" value="3/12">
+                        <input type="button" value="JOUER">
+                    </center>
+                </section>
+        </section>
+        <section class="gameinfo">
+            <section class="display1">
+                <div class="timer">
+                    <h3>Timer</h3>
+                    <p>0:00:00:00</p>
+                </div>
+                <div class="coup">
+                    <h3>Nombres de Coup</h3>
+                    <p>0</p>
+                </div>
+            </section>
+            <section class="cardfound">
 
-<script src="asset/jquery-3.4.1/jquery-3.4.1.min.js" rel="text/javascript"></script>
-<script src="js/jeumemo.js" rel="text/javascript"></script>
-<script src="js/chrono.js" rel="text/javascript"></script>
-<script src="js/theme.js" rel="text/javascript"></script>
+            </section>
+        </section>
+        <section class=table>
+            <center>
+            </center>
+        </section>
+        <br>
+        <center class="displaynone">
+            <form name="chronoForm">
+                <input type="text" name="chronotime" id="chronotime" value="0:00:00:00"/>
+                <input type="button" name="startstop" value="start!" onClick="chronoStart();" />
+                <input type="button" name="reset" value="reset!" onClick="chronoReset();chronoStart();"  />
+            </form>
+        </center>
+        <footer>
+            <div class="footer-bottom">
+                <div class="site-container footer-bottom-inner">
+                    <center>
+                        <p id="footer">© 2020 | Created by Corenthin Techer &amp; Alexandre Kergoat  | All rights Reserved.</p>
+                    </center>
+                </div>
+            </div>
+        </footer>
 
-</body>
+        <script src="asset/jquery-3.4.1/jquery-3.4.1.min.js" rel="text/javascript"></script>
+        <script src="js/jeumemo.js" rel="text/javascript"></script>
+        <script src="js/chrono.js" rel="text/javascript"></script>
+        <script src="js/theme.js" rel="text/javascript"></script>
 
+    </body>
 </html>
