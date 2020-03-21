@@ -1,10 +1,10 @@
 let checkflip = 0;
 let lastcard = "";
-let backcard = "";
+let backcard = "img/card/CARDS4.png";
+let tablemodel=["JDG","IRONMAN","ARIANA","JB","MINECRAFT","WORLD"];
 let tablecard=[];
-let collums=3;
-let row=2;
-
+let collums=6;
+let row=3;
 class card{
     constructor(imgback,imgfront,idcard)
     {
@@ -49,7 +49,8 @@ class card{
         $(idfront2).append(frontimg);
         $(idback2).append(backimg);
     }
-    flip() {
+    flip() 
+    {
         var id2='#'+this.id;
         $(id2).addClass('flipped');
         this.isFlipped = true;
@@ -61,31 +62,85 @@ class card{
         this.isFlipped=false;
     }
 }
-let card1=new card("img/CARDS6.png","img/CARDS4.png","card1");
-let card2=new card("img/CARDS5.png","img/CARDS4.png","card2");
-let card3=new card("img/CARDS5.png","img/CARDS4.png","card3");
-let card4=new card("img/CARDS5.png","img/CARDS4.png","card4");
 $(document).ready(()=>{
-
-    card1.set_tags();
-    card2.set_tags();
-    card3.set_tags();
-    card4.set_tags();
-    //game();
+    setGame();
+    
+    game();
 });
-
+function setGame()
+{
+    $('.container').click(function(){
+        var backimg = $(this).children().attr("src");
+        backimg=backimg.substring(9,backimg.length-4);
+        $('#selectbc').text("Vous avez choisi le fond "+backimg)
+    });
+    $('.mode').click(function(){
+        console.log($(this).attr("id"));
+        if($(this).attr("id")=="2/3")
+        {
+            row=2;
+            collums=3;
+            $('.table').css("grid-template-columns","repeat("+collums+",1fr)");
+            $('#selectlv').text("Vous avez choisi le mode "+row+"/"+collums+"; Appuyer sur JOUER pour commencer");
+        }
+        if($(this).attr("id")=="3/6")
+        {
+            row=3;
+            collums=6;
+            $('.table').css("grid-template-columns","repeat("+collums+",1fr)");
+            $('#selectlv').text("Vous avez choisi le mode "+row+"/"+collums+"; Appuyer sur JOUER pour commencer");
+        }
+        if($(this).attr("id")=="3/12")
+        {
+            row=3;
+            collums=12;
+            $('.table').css("grid-template-columns","repeat("+collums+",1fr)");
+            $('#selectlv').text("Vous avez choisi le mode "+row+"/"+collums+"; Appuyer sur JOUER pour commencer");
+        }
+        if($(this).attr("id")=="JOUER")
+        {
+            $('.edit_niveau').addClass("displaynone");
+            $('.gameinfo').removeClass("displaynone");
+            setTable();
+            console.log(tablecard);
+            shuffle(tablecard);
+            for (var i=0;i<tablecard.length;i++)
+            {
+                tablecard[i].set_tags();
+            }
+        }
+    });
+}
+function setTable()
+{
+    tablecard = [];
+    var size = collums * row;
+    for (var i=0;i<size;i=i+2)
+    {
+        var img=tablemodel[Math.floor(Math.random() * tablemodel.length)];
+        tablecard[i]=new card("img/card/"+img+".png",backcard,"card"+i);
+        tablecard[i+1]=new card("img/card/"+img+".png",backcard,"card"+(i+1));
+    }
+}
+function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+}
 function game()
 {
     $('.card').click(function(){
         var testid=$(this).attr("id");
         for (var i = 0;i<tablecard.length;i++)
         {
-            if (!(tablecard[i].idcard==testid && tablecard[i].isFlipped))
-                {
-                    tablecard[i].flip();
-                }
+            if (tablecard[i].id==testid)
+            {
+                var j=i;
+            }
         }
-        
+        if (!(tablecard[j].isFlipped))
+        {
+            tablecard[j].flip();
+            peerCondition()
+        }
     });
 }
 
