@@ -6,12 +6,12 @@ if(this.checked)
         let theme="dark";
         trans();
         $('html').attr('data-theme',theme);
-        $('#imgtitle').attr('src','img/JEUMEMORYWHITE.png');
+        $('#imgtitle').attr('src','img/title/JEUMEMORYWHITE.png');
     }else{
         let theme="light";
         trans();
         $('html').attr('data-theme',theme);
-        $('#imgtitle').attr('src','img/JEUMEMORYBLACK.png');
+        $('#imgtitle').attr('src','img/title/JEUMEMORYBLACK.png');
     }
 });
 
