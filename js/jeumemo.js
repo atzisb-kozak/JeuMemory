@@ -9,45 +9,45 @@ class chronometre
 {
 	constructor()
 	{
-		this.depart = 0
-		this.arrive = 0
-		this.difference = 0
-		this.IDTimer = 0
+		this.depart = 0;
+		this.arrive = 0;
+		this.difference = 0;
+		this.IDTimer = 0;
 	}
 	chrono()
 	{
-		this.arrive = new Date()
-		this.difference = this.arrive - this.depart
-        this.difference = new Date(this.difference)
-        let msec= this.difference.getMilliseconds()
-		let sec = this.difference.getSeconds()
-		let min = this.difference.getMinutes()
-		let hr = this.difference.getHours()-4
+		this.arrive = new Date();
+		this.difference = this.arrive - this.depart;
+        this.difference = new Date(this.difference);
+        let msec= this.difference.getMilliseconds();
+		let sec = this.difference.getSeconds();
+		let min = this.difference.getMinutes();
+		let hr = this.difference.getHours()-4;
 		if (min < 10){
-			min = "0" + min
+			min = "0" + min;
 		}
 		if (sec < 10){
-			sec = "0" + sec
+			sec = "0" + sec;
 		}
 		if(msec < 10){
-			msec = "00" +msec
+			msec = "00" +msec;
 		}
 		else if(msec < 100){
-			msec = "0" +msec
+			msec = "0" +msec;
 		}
-		$('.timer').children("p").text(hr + ":" + min + ":" + sec + ":" + msec)
-		this.IDTimer = setTimeout("chronometer.chrono()", 10)
+		$('.timer').children("p").text(hr + ":" + min + ":" + sec + ":" + msec);
+		this.IDTimer = setTimeout("chronometer.chrono()", 10);
 	}
 	chronodepart(){
-		this.depart = new Date()
-		this.chrono()
+		this.depart = new Date();
+		this.chrono();
 	}
 	chronoStop(){
-		clearTimeout(this.IDTimer)
+		clearTimeout(this.IDTimer);
 	}
 	chronoReset(){
-		$('.timer').children("p").text("0:00:00:000")
-		this.depart = new Date()
+		$('.timer').children("p").text("0:00:00:000");
+		this.depart = new Date();
 	}
 }
 
@@ -109,7 +109,7 @@ class card{
         this.isFlipped=false;
     }
 }
-let lastcard =new card("","","");
+let lastcard = new card("","","");
 $(document).ready(()=>{
     setGame();
 });
@@ -147,9 +147,11 @@ function setGame()
         }
         if($(this).attr("id")=="JOUER")
         {
-            if(collums == 0 && row==0)
+            if(collums == 0 && row==0 )
             {
                 $('#selectlv').text("Vous devez choisir un mode pour jouer");
+            }else if(backcard==""){
+                $('#selectbc').text("Vous devez choisir un dos de carte");
             }else{
                 $('.edit_niveau').addClass("displaynone");
                 $('.gameinfo').removeClass("displaynone");
