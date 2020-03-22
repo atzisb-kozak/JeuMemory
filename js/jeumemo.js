@@ -2,9 +2,11 @@ let checkflip = 0;
 let backcard = "";
 let tablemodel=["JDG","IRONMAN","ARIANA","JB","MINECRAFT","WORLD"];
 let tablecard=[];
+let manytofind=0;
+let found=0;
 let nbcoup=0;
-let collums=0;
-let row=0;
+let collums;
+let row;
 class chronometre
 {
 	constructor()
@@ -147,7 +149,7 @@ function setGame()
         }
         if($(this).attr("id")=="JOUER")
         {
-            if(collums == 0 && row==0 )
+            if(collums == 0 || collums == undefined && row==0 || row == undefined )
             {
                 $('#selectlv').text("Vous devez choisir un mode pour jouer");
             }else if(backcard==""){
@@ -186,6 +188,11 @@ function game()
             nbcoup++;
             $('.coup').children("p").text(nbcoup);
             peerCondition(tablecard[j]);
+
+        }
+        if (Victory())
+        {
+            victoryScreen();
         }
     });
 }
@@ -193,6 +200,7 @@ function setTable()
 {
     tablecard = [];
     var size = collums * row;
+    manytofind = size/2;
     for (var i=0;i<size;i=i+2)
     {
         var img=tablemodel[Math.floor(Math.random() * tablemodel.length)];
@@ -216,6 +224,7 @@ function peerCondition(cardflipped)
                 $(id2).addClass('displaynone');
                 $(lastid2).addClass('displaynone');
             },1000);
+            found++;
         }else{
            console.log(lastcard);
             window.setTimeout(()=>{
@@ -229,4 +238,42 @@ function peerCondition(cardflipped)
         lastcard = cardflipped;
     }
 }
+function Victory(){
+    return found==manytofind;
+}
+function victoryScreen()
+{
+    chronometer.chronoStop();
+    $('.gameinfo').addClass('displaynone');
+    $('.Victoryscreen').removeClass('displaynone');
+    $('.table').children().remove(".container");
+    found=0;
 
+    $('#rejouer').click(function(){
+        $('.Victoryscreen').addClass("displaynone");
+        $('.gameinfo').removeClass("displaynone");
+        nbcoup=0;
+        $('.coup').children("p").text(nbcoup);
+        $('')
+        setTable();
+        shuffle(tablecard);
+        var i =0;
+        while(i<tablecard.length)
+            {
+                tablecard[i].set_tags();
+                i++;
+            }
+        chronometer.chronodepart();
+        game();
+    });
+    $('#changemode').click(function(){
+        $('.Victoryscreen').addClass("displaynone");
+        $('.edit_niveau').removeClass("displaynone");
+        nbcoup=0;
+        manytofind=0;
+        collums = 0;
+        row=0;
+        $('.coup').children("p").text(nbcoup);
+        setGame();
+    });
+}
