@@ -2,8 +2,56 @@ let checkflip = 0;
 let backcard = "";
 let tablemodel=["JDG","IRONMAN","ARIANA","JB","MINECRAFT","WORLD"];
 let tablecard=[];
+let nbcoup=0;
 let collums=0;
 let row=0;
+class chronometre
+{
+	constructor()
+	{
+		this.depart = 0
+		this.arrive = 0
+		this.difference = 0
+		this.IDTimer = 0
+	}
+	chrono()
+	{
+		this.arrive = new Date()
+		this.difference = this.arrive - this.depart
+        this.difference = new Date(this.difference)
+        let msec= this.difference.getMilliseconds()
+		let sec = this.difference.getSeconds()
+		let min = this.difference.getMinutes()
+		let hr = this.difference.getHours()-4
+		if (min < 10){
+			min = "0" + min
+		}
+		if (sec < 10){
+			sec = "0" + sec
+		}
+		if(msec < 10){
+			msec = "00" +msec
+		}
+		else if(msec < 100){
+			msec = "0" +msec
+		}
+		$('.timer').children("p").text(hr + ":" + min + ":" + sec + ":" + msec)
+		this.IDTimer = setTimeout("chronometer.chrono()", 10)
+	}
+	chronodepart(){
+		this.depart = new Date()
+		this.chrono()
+	}
+	chronoStop(){
+		clearTimeout(this.IDTimer)
+	}
+	chronoReset(){
+		$('.timer').children("p").text("0:00:00:000")
+		this.depart = new Date()
+	}
+}
+
+let chronometer=new chronometre();
 class card{
     constructor(imgback,imgfront,idcard)
     {
@@ -78,6 +126,7 @@ function setGame()
         {
             row=2;
             collums=3;
+            $('.table').css("margin","auto")
             $('.table').css("grid-template-columns","repeat("+collums+",1fr)");
             $('#selectlv').text("Vous avez choisi le mode "+row+"/"+collums+"; Appuyer sur JOUER pour commencer");
         }
@@ -85,6 +134,7 @@ function setGame()
         {
             row=3;
             collums=6;
+            $('.table').css("margin-left","10%")
             $('.table').css("grid-template-columns","repeat("+collums+",1fr)");
             $('#selectlv').text("Vous avez choisi le mode "+row+"/"+collums+"; Appuyer sur JOUER pour commencer");
         }
@@ -112,6 +162,7 @@ function setGame()
                     i++;
                 }
             }
+            chronometer.chronodepart();
             game();
         }
     });
@@ -130,6 +181,8 @@ function game()
         if (!(tablecard[j].isFlipped))
         {
             tablecard[j].flip();
+            nbcoup++;
+            $('.coup').children("p").text(nbcoup);
             peerCondition(tablecard[j]);
         }
     });
