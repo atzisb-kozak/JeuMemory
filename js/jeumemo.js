@@ -1,6 +1,5 @@
 let checkflip = 0;
-let lastcard = "";
-let backcard = "img/card/CARDS4.png";
+let backcard = "";
 let tablemodel=["JDG","IRONMAN","ARIANA","JB","MINECRAFT","WORLD"];
 let tablecard=[];
 let collums=0;
@@ -62,6 +61,7 @@ class card{
         this.isFlipped=false;
     }
 }
+let lastcard =new card("","","");
 $(document).ready(()=>{
     setGame();
 });
@@ -74,26 +74,25 @@ function setGame()
         $('#selectbc').text("Vous avez choisi le fond "+backimg)
     });
     $('.mode').click(function(){
-        console.log($(this).attr("id"));
         if($(this).attr("id")=="2/3")
         {
             row=2;
             collums=3;
-            //$('.table').css("grid-template-columns","repeat("+collums+",1fr)");
+            $('.table').css("grid-template-columns","repeat("+collums+",1fr)");
             $('#selectlv').text("Vous avez choisi le mode "+row+"/"+collums+"; Appuyer sur JOUER pour commencer");
         }
         if($(this).attr("id")=="3/6")
         {
             row=3;
             collums=6;
-            //$('.table').css("grid-template-columns","repeat("+collums+",1fr)");
+            $('.table').css("grid-template-columns","repeat("+collums+",1fr)");
             $('#selectlv').text("Vous avez choisi le mode "+row+"/"+collums+"; Appuyer sur JOUER pour commencer");
         }
         if($(this).attr("id")=="3/12")
         {
             row=3;
             collums=12;
-            //$('.table').css("grid-template-columns","repeat("+collums+",1fr)");
+            $('.table').css("grid-template-columns","repeat("+collums+",1fr)");
             $('#selectlv').text("Vous avez choisi le mode "+row+"/"+collums+"; Appuyer sur JOUER pour commencer");
         }
         if($(this).attr("id")=="JOUER")
@@ -105,7 +104,6 @@ function setGame()
                 $('.edit_niveau').addClass("displaynone");
                 $('.gameinfo').removeClass("displaynone");
                 setTable();
-                console.log(tablecard);
                 shuffle(tablecard);
                 var i =0;
                 while(i<tablecard.length)
@@ -132,6 +130,7 @@ function game()
         if (!(tablecard[j].isFlipped))
         {
             tablecard[j].flip();
+            peerCondition(tablecard[j]);
         }
     });
 }
@@ -149,33 +148,30 @@ function setTable()
 function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
 }
-function peerCondition(id,classes)
+function peerCondition(cardflipped)
 {
-    let id2='#'+id;
     checkflip++;
     if (checkflip==2)
     {
-        if (lastclass==classes)
+        if (lastcard.imgBack == cardflipped.imgBack)
         {
-            let lastid2='#'+lastid;
-            alert("validé");
             window.setTimeout(()=>{
-                $(lastid2).addClass('displaynone');
+                var id2='#'+cardflipped.id;
+                var lastid2='#'+lastcard.id;
                 $(id2).addClass('displaynone');
+                $(lastid2).addClass('displaynone');
             },1000);
         }else{
-           alert("Wrong")
+           console.log(lastcard);
             window.setTimeout(()=>{
-                unflip();
+                cardflipped.unflip();
+                lastcard.unflip();
+                lastcard=new card("","","");
             },1000)
         }
         checkflip=0;
-        lastid="";
-        lastclass="";
     }else{
-        lastid=id;
-        lastclass=$(id2).attr("class");
-        console.log(lastclass);
+        lastcard = cardflipped;
     }
 }
 
